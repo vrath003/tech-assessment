@@ -8,12 +8,15 @@ namespace Review
 {
     public class People
     {
-        private static readonly DateTimeOffset Under16 = DateTimeOffset.UtcNow.AddYears(-15);
+        private static readonly DateTimeOffset Under16 = DateTimeOffset.UtcNow.AddYears(-15);  //Under16 variable is declared once and it is readonly by all instances of class 
         public string Name { get; private set; }
         public DateTimeOffset DOB { get; private set; }
 
         public People(string name) : this(name, Under16.Date) { }
-
+       /******************************************************************
+       DOB variable is declared as DateTimeOffset type above(line 13) but passed as DateTime type below(line 20). 
+       This creates inconsistency and there is a chance of loosing timezone offset.
+       *********************************************************************/
         public People(string name, DateTime dob)
         {
             Name = name;
@@ -35,17 +38,24 @@ namespace Review
         /// <summary>
         /// GetPeoples
         /// </summary>
-        /// <param name="j"></param>
+        /// <param name="j"></param>  /* Correction: This comment is misleading. It should be param name="i" instead of param name="j" */
         /// <returns>List<object></returns>
-        public List<People> GetPeople(int i)
+        /*
+        Above commenting could have been done in a tidy way as below.
+        Below function returns a list of people objects with random name and age.
+        */
+        public List<People> GetPeople(int i)  
         {
             for (int j = 0; j < i; j++) {
                 try
                 {
-                    // Creates a dandon Name
+                    // Creates a dandon Name  
+                    /*Correction in comment above: work should be "random"  instead of "dandon" */
                     string name = string.Empty;
+                    /* random variable below is re created whenever the loop runs. This should be outside the loop. */
                     var random = new Random();
-                    if (random.Next(0, 1) == 0) {
+                    /*Correction: In below line random.Next(0,1) will always return 0 therefore it can be corrected to random.Next(0, 2) instead of random.Next(0, 1)*/
+                    if (random.Next(0, 1) == 0) {  
                         name = "Bob";
                     }
                     else { name = "Betty"; }
