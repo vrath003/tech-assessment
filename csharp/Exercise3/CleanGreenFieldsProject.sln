@@ -1,0 +1,130 @@
+1. Development Environment set up
+
+*****************Tools required*****************
+.NET 8 SDK  --> Framework to build and run C# project
+GIT  --> For version control
+Visual Studio or VSCode --> For development
+GitHub or AzureDevOps or similar --> For Pipeline
+xUnit --> For running test cases
+dotnet CLI --> Build, run and test automation
+C# dev kit --> Development kit for C# code
+
+2. Scaffold structure
+DeckCardGame.Core  --> Core logic of CardGame
+DeckCardGame.App   --> UI 
+DeckCardGame.Tests --> Unit tests and Integration tests
+DeckCardGame.sln   --> Solution 
+
+DeckCardGame/
+│
+│--DeckCardGame.sln                         # Solution file that ties everything together
+│
+|-- src/
+│   |-- DeckCardGame.Core/                   # Domain layer (pure logic, entities, no dependencies)
+│   │   |-- Cards/
+│   │   │   |-- Card.cs                  # Represents a single playing card (Rank + Suit)
+│   │   │   |-- Suit.cs                  # Enum for card suits (Hearts, Spades, etc.)
+│   │   │   |-- Rank.cs                  # Enum for ranks (Ace, 2, 3... King)
+│   │   │   └── Deck.cs                  # Handles deck creation, shuffling, and drawing cards
+│   │   │
+│   │   |-- Players/
+│   │   │   └── Player.cs                # Represents a player (human or computer), holds their hand
+│   │   │
+│   │   |-- Interfaces/
+│   │   │   └── IDeck.cs                 # Optional interface for mocking decks in tests
+│   │   │
+│   │   └── DeckCardGame.Core.csproj         # Project file for the domain layer
+│   │
+│   |-- DeckCardGame.Application/            # Application logic (game engine, rules, AI)
+│   │   |-- GameEngine/
+│   │   │   |-- IGameService.cs          # Interface defining game flow (start, play round, check win)
+│   │   │   └── GameService.cs           # Implements game logic (draw cards, compare ranks, track score)
+│   │   │
+│   │   └── DeckCardGame.Application.csproj  # Project file for the game engine layer
+│   │
+│   └── DeckCardGame.App/                    # Console app (entry point, user interface)
+│       |-- Program.cs                   # Main entry point (handles input/output, uses GameService)
+│       └── DeckCardGame.App.csproj          # Project file for the console application
+│
+└── tests/
+    └── DeckCardGame.Tests/                  # Unit tests for Core and Application layers
+        |-- Core/
+        │   |-- DeckTests.cs             # Tests for deck creation, shuffling, and drawing
+        │   └── CardTests.cs             # Tests for card comparisons and structure
+        │
+        |-- Application/
+        │   └── GameServiceTests.cs      # Tests for game logic (round outcomes, scoring, etc.)
+        │
+        |-- TestHelpers/
+        │   └── FakeDeck.cs              # Mock or fake deck for deterministic tests
+        │
+        └── DeckCardGame.Tests.csproj        # Project file for tests
+
+
+DeckCardGame.sln -->	The main solution file — manages and links all projects.
+src/ -->	Contains all the source code for your game.
+DeckCardGame.Core/ -->	Domain layer — defines the what of the game (cards, deck, players). No dependencies on UI or frameworks.
+Cards/ -->	Encapsulates everything related to playing cards (Card, Deck, Rank, Suit).
+Players/ -->	Contains player models — tracks name, hand, and actions.
+Interfaces/	--> Holds abstractions for testability (e.g., IDeck interface).
+DeckCardGame.Application/ -->	The application layer — defines the how (how cards interact, who wins, round logic).
+GameEngine/	--> Contains the orchestration logic (game rules, turn logic, scoring).
+DeckCardGame.App/ -->	The console UI — interacts with the user, delegates logic to the Application layer.
+Program.cs	--> Entry point of the app; prompts user input, displays results, and runs the game loop.
+tests/ -->	Holds automated tests (unit, integration).
+Core/ -->	Tests for basic entities like Card and Deck.
+Application/ -->	Tests for higher-level logic (e.g., GameService).
+TestHelpers/ -->	Utility fakes/mocks used by multiple tests (e.g., FakeDeck).
+
+####How the Layers Work Together###
+
+DeckCardGame.App --> Handles user input/output (console interaction).
+                     Calls methods from the GameService in the Application layer.
+
+CardGame.Application --> Contains the main game logic (deal cards, compare, score, decide winner).
+                        Uses domain models (Card, Player, Deck) from the Core layer.
+
+CardGame.Core --> Pure business logic — what a card, deck, or player is.
+                  No references to UI or infrastructure.
+
+CardGame.Tests --> Validates that Core and Application logic behave as expected.
+
+3. What would your delivery pipeline look like
+
+***************CI/CD Pipeline Steps******************
+
+#Checkout repository
+  Pulls the latest source code from GitHub so the workflow can access it.
+#Setup .NET SDK
+  Installs the required .NET 8 SDK version for building and running the project.
+#Restore dependencies
+  Runs dotnet restore to download all NuGet packages for your solution.
+#Build the solution
+  Runs dotnet build in Release mode to compile all projects (Core, Application, App, and Tests).
+#Run unit tests
+  Executes dotnet test to run all test cases and verify functionality.
+#Publish console app
+  Runs dotnet publish on the CardGame.App project to package it into a runnable output folder.
+#Upload build artifacts
+  Stores the published output (e.g., /publish folder) as a downloadable artifact in GitHub Actions.
+#Create release
+  Automatically tags a new version and creates a GitHub Release if the pipeline runs on main.
+#Deploy to environment
+  Pushes the built app to a server, cloud (Azure/AWS), or container registry if configured.
+
+
+#############  Architecture Decision Record  ####################
+1. Alternative approaches you considered and why you chose your approach
+
+For the Card Game project, the chosen approach is based on a Clean Architecture
+pattern — specifically tailored for testability, modularity, and future extensibility.
+
+Alternative approach would have been to use Classical pattern. In this type of pattern
+there is a tight coupling between layers(Presentation, Business Logic, Database, Data Access)
+which is hard to extend and test.
+
+2. What you learned or what surprised you during the implementation
+
+The solution is just designed and not implemented yet. It looks like a simple project
+but in actual while designing I found that the layers are going deeper if we think
+of extensibility and testability perspective. 
