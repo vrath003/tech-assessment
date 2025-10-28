@@ -20,5 +20,7 @@ Among the language options I was familiar with almost all the languages apart fr
 
 4. Exercise3 folder --> This folder contains the solution file for Exercise 3 names CleanGreenFieldsProject.
 
+# What would I have done if I would have more time
 
+If I would have more time then I would have tried to work on with other languages which are in this Technical Assessment. However I also feel that the assessment which I have completed in csharp language is enough to demonstrate my skills.
 
