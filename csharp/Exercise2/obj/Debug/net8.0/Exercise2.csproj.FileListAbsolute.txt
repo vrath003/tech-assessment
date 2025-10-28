@@ -1,0 +1,15 @@
+/workspaces/tech-assessment/csharp/Exercise2/bin/Debug/net8.0/Exercise2.deps.json
+/workspaces/tech-assessment/csharp/Exercise2/bin/Debug/net8.0/Exercise2.runtimeconfig.json
+/workspaces/tech-assessment/csharp/Exercise2/bin/Debug/net8.0/Exercise2.dll
+/workspaces/tech-assessment/csharp/Exercise2/bin/Debug/net8.0/Exercise2.pdb
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.csproj.AssemblyReference.cache
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.AssemblyInfoInputs.cache
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.AssemblyInfo.cs
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.csproj.CoreCompileInputs.cache
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.sourcelink.json
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.dll
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/refint/Exercise2.dll
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.pdb
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/Exercise2.genruntimeconfig.cache
+/workspaces/tech-assessment/csharp/Exercise2/obj/Debug/net8.0/ref/Exercise2.dll
