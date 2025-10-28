@@ -31,5 +31,13 @@ namespace Exercise2.Tests
             Assert.Equal("Bob", person.Name);
             Assert.Equal(dob, person.DOB.Date);
         }
+
+        // Negative test case: Future DOB should throw (invalid)
+        [Fact]
+        public void Constructor_ShouldThrow_WhenDOBInFuture()
+        {
+            var future = DateTime.UtcNow.AddYears(1);
+            Assert.Throws<ArgumentException>(() => new People("Tom", future));
+        }
     }
 }

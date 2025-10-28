@@ -48,5 +48,13 @@ namespace Exercise2.Tests
 
             Assert.Equal("Jane", marriedName);
         }
+
+         //Negative: GetPeople with negative count
+        [Fact]
+        public void GetPeople_ShouldThrow_WhenCountIsNegative()
+        {
+            var unit = new BirthingUnit();
+            Assert.Throws<ArgumentOutOfRangeException>(() => unit.GetPeople(-5));
+        }
     }
 }
